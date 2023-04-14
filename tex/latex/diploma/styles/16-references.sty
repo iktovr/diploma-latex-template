@@ -1,0 +1,23 @@
+% Author: CatInCosmicSpace
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{16-references}[2021/03/21 v1.2 Список использованных источников]
+
+% Сведения об источниках следует располагать в порядке появления ссылок на 
+% источники в тексте отчета и нумеровать арабскими цифрами с точкой и печатать 
+% с абзацного отступа.
+
+\RequirePackage{csquotes}
+\RequirePackage{xpatch}
+
+\RequirePackage[
+    backend=biber,
+    bibstyle=gost-numeric,
+    citestyle=numeric,
+    sorting=none,
+    % refsection=structure,
+    % sorting=ynt,
+]{biblatex}
+\defbibheading{bibliography}[СПИСОК~ИСПОЛЬЗОВАННЫХ~ИСТОЧНИКОВ]{\structure{#1}}
+\addto{\captionsrussian}{%
+    \renewcommand{\contentsname}{СОДЕРЖАНИЕ}
+}

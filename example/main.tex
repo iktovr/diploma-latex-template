@@ -1,0 +1,68 @@
+\documentclass{diploma}
+
+% Текст-заполнитель
+\usepackage{lipsum}
+\SetLipsumText{fishes} % fishes.ltd.tex
+
+\student{Гончаров Андрей Яковлевич}
+\group{М8О-407Б-19}
+\theme{Создание отчёта по ВКР}
+
+\supervisor{Орлов Марсель Максимович}
+\firstConsultant{Алешина Анна Константиновна}
+\secondConsultant{Свиридов Михаил Артемьевич}
+\reviewer{Ильина Алина Даниловна}
+
+\faculty{№ 8 <<Компьютерные науки и прикладная математика>>}
+\department{806}
+\speciality{01.02.03 <<Прикладная математика и информатика>>}
+\profile{Информатика и компьютерные науки}
+
+% Здесь необходим разрыв строки из-за особенностей титульной страницы
+\departmentFullName{№ 806 <<Вычислительная математика \\ и программирование>>}
+\headOfDepartment{Крылов Сергей Сергеевич}
+\date{XX мая}
+
+\include{contents/glossary}
+\include{contents/terms}
+
+\addbibresource{main.bib}
+    
+\begin{document}
+    \maketitle
+
+    % \includepdf[pages=-]{extra/task} % Задание
+    \setcounter{page}{4} % Устанавливает счётчик страниц
+
+    \include{contents/0-abstract} % Реферат
+
+    \tableofcontents % Содержание 
+    \termsanddefenitions % Термины и определения
+    \listofabbreviations % Перечень сокращений и обозначений
+ 
+    \include{contents/1-introduction} % Введение
+
+    \include{contents/2-00-compilation} % Основная часть
+    \include{contents/2-01-titlepage}
+    \include{contents/2-02-techtask}
+    \include{contents/2-03-abstract}
+    \include{contents/2-04-glossary}
+    \include{contents/2-05-figures}
+    \include{contents/2-06-citations}
+    \include{contents/2-07-tables}
+    \include{contents/2-08-enums}
+    \include{contents/2-09-formulas}
+    \include{contents/2-10-algorithms}
+    \include{contents/2-11-math}
+    \include{contents/2-12-listings}
+    
+    \include{contents/3-conclusion} % Заключение
+
+    \printbibliography % Список литературы
+
+    \appendix % Приложения
+    \include{contents/4-appendix-a}
+    \include{contents/4-appendix-b}
+    \include{contents/4-appendix-c}
+    \include{contents/4-appendix-d}
+\end{document}

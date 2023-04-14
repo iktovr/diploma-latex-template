@@ -1,0 +1,151 @@
+% Author: CatInCosmicSpace
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{10-titlepage}[2021/03/21 v1.2 Титульный лист]
+
+% Поля для заполнения для ВКР
+\def\student#1{\gdef\@student{#1}}
+\def\@student{\@latex@warning@no@line{No \noexpand\student given}}
+
+\def\theme#1{\gdef\@theme{#1}}
+\def\@theme{\@latex@warning@no@line{No \noexpand\theme given}}
+
+\def\group#1{\gdef\@group{#1}}
+\def\@group{\@latex@warning@no@line{No \noexpand\group given}}
+
+\def\department#1{\gdef\@department{#1}}
+\def\@department{\@latex@warning@no@line{No \noexpand\department given}}
+
+\def\faculty#1{\gdef\@faculty{#1}}
+\def\@faculty{\@latex@warning@no@line{No \noexpand\faculty given}}
+
+\def\supervisor#1{\gdef\@supervisor{#1}}
+\def\@supervisor{\@latex@warning@no@line{No \noexpand\supervisor given}}
+
+\def\firstConsultant#1{\gdef\@firstConsultant{#1}}
+\def\@firstConsultant{\@latex@warning@no@line{No \noexpand\firstConsultant given}}
+
+\def\secondConsultant#1{\gdef\@secondConsultant{#1}}
+\def\@secondConsultant{\@latex@warning@no@line{No \noexpand\secondConsultant given}}
+
+\def\reviewer#1{\gdef\@reviewer{#1}}
+\def\@reviewer{\@latex@warning@no@line{No \noexpand\reviewer given}}
+
+\def\headOfDepartment#1{\gdef\@headOfDepartment{#1}}
+\def\@headOfDepartment{\@latex@warning@no@line{No \noexpand\headOfDepartment given}}
+
+\def\departmentFullName#1{\gdef\@departmentFullName{#1}}
+\def\@departmentFullName{\@latex@warning@no@line{No \noexpand\departmentFullName given}}
+
+\def\profile#1{\gdef\@profile{#1}}
+\def\@profile{\@latex@warning@no@line{No \noexpand\profile given}}
+
+\def\speciality#1{\gdef\@speciality{#1}}
+\def\@speciality{\@latex@warning@no@line{No \noexpand\speciality given}}
+
+\def\date#1{\gdef\@date{#1}}
+\def\@date{\@latex@warning@no@line{No \noexpand\date given}}
+
+\RequirePackage{fancyhdr}
+\fancypagestyle{year}{
+  \fancyfoot[C]{Москва \the\year}
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyhead{}
+}
+
+\RequirePackage{tabto}
+\RequirePackage[normalem]{ulem}
+\RequirePackage[usestackEOL]{stackengine}
+\RequirePackage{lineno}
+\RequirePackage{xstring}
+\RequirePackage{ifthen}
+
+\newcommand\makeHeader{
+    \noindent\begin{minipage}{0.05\textwidth}
+        \includegraphics[scale=0.4]{inc/mai.pdf}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.85\textwidth}\raggedleft
+        \begin{center}
+            \fontsize{11pt}{10pt}\selectfont 
+            \textbf{МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ \\
+                РОССИЙСКОЙ ФЕДЕРАЦИИ \\ 
+                \hfill\break
+                ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ \\
+                ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ \\ 
+                <<МОСКОВСКИЙ АВИАЦИОННЫЙ ИНСТИТУТ
+            } \\
+            (национальный исследовательский университет)>>
+        \end{center}
+    \end{minipage}
+    \begin{center}
+        \fontsize{12pt}{0.1\baselineskip}\selectfont
+        \noindent\makebox[\linewidth]{\rule{\textwidth}{1.5pt}} 
+    \end{center}
+    \begin{flushleft}
+        \fontsize{12pt}{16pt}\selectfont
+        \textbf{Институт (Филиал)} \uline{\@faculty\hfill} \textbf{Кафедра} \uline{\@department\hfill} \\
+        \textbf{Группа} \uline{\@group} \textbf{Направление подготовки} \expandafter\uline\expandafter{\expanded{\@speciality}\hfill} \\
+        \textbf{Профиль} \uline{\@profile\hfill} \\
+        \textbf{Квалификация:} \uline{\textbf{бакалавр}\hfill} 
+    \end{flushleft}
+}
+
+\newcommand\makeTheme[1]{
+    \noindent на тему <<{#1}>>
+}
+
+\newcommand\signature[1]{
+    (\uline{\hspace{#1}})
+}
+
+\newcommand\fillTitle{
+    \vfill
+
+    \noindent\begin{center}
+        \centering\bfseries\fontsize{16pt}{18pt}\selectfont 
+        ВЫПУСКНАЯ КВАЛИФИКАЦИОННАЯ РАБОТА \\
+        БАКАЛАВРА
+    \end{center}
+
+    \vfill
+
+    \makeTheme{\@theme}
+
+    \vspace{28pt}
+    
+    {
+        \fontsize{12pt}{14pt}\selectfont
+        \setlength{\tabcolsep}{0pt}
+        \renewcommand{\arraystretch}{1.2}
+        \noindent \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}Xr}
+            \noindent Автор ВКРБ:   & \hspace{2cm} \@student          & \signature{3.5cm} \\
+            \noindent Руководитель: & \hspace{2cm} \@supervisor       & \signature{3.5cm} \\
+            \noindent Консультант:  & \hspace{2cm} \@firstConsultant  & \signature{3.5cm} \\
+            \noindent Консультант:  & \hspace{2cm} \@secondConsultant & \signature{3.5cm} \\
+            \noindent Рецензент:    & \hspace{2cm} \@reviewer         & \signature{3.5cm} \\
+        \end{tabularx}
+
+        \vspace{28pt}
+
+        \noindent \textbf{К защите допустить}
+
+        \noindent Заведующий кафедрой \@departmentFullName \hspace{2cm} \@headOfDepartment \hfill \signature{3.5cm}
+        
+        \noindent \@date\ \the\year\ года
+    }
+
+    \vfill 
+
+    \clearpage
+}
+
+\renewcommand\maketitle{
+    \begin{titlepage}        
+        \thispagestyle{year}
+        \makeHeader
+
+        \fillTitle
+
+        \clearpage
+    \end{titlepage}
+}
