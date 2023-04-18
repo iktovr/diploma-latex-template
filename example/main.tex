@@ -23,16 +23,21 @@
 \headOfDepartment{Крылов Сергей Сергеевич}
 \date{XX мая}
 
-\include{contents/glossary}
-\include{contents/terms}
+\input{contents/glossary}
+\input{contents/terms}
 
 \addbibresource{main.bib}
+
+% Иллюстрации всегда по центру
+\makeatletter
+\g@addto@macro\@floatboxreset\centering
+\makeatother
     
 \begin{document}
     \maketitle
 
     % \includepdf[pages=-]{extra/task} % Задание
-    \setcounter{page}{4} % Устанавливает счётчик страниц
+    \setcounter{page}{2} % Устанавливает счётчик страниц
 
     \include{contents/0-abstract} % Реферат
 
