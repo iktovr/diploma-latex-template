@@ -1,10 +1,15 @@
-\section{Описание алгоритмов}
+\section{ОПИСАНИЕ АЛГОРИТМОВ}
 
-Пример использования алгоритма~\ref{alg1}:
+Псевдокод необходимо вставлять как иллюстрации --- он должен быть помещен в окружение \texttt{figure}, подписан и иметь ссылку в тексте.
 
-	% Первый алгоритм
-\begin{algorithm}[htp!]   
-    \SetAlgoLined
+Также из-за особенностей \texttt{algorithm}, для него обязательна опция \texttt{H} и внутри \texttt{figure} его еще надо оборачивать в \texttt{minipage} размером с длину строки
+
+Пример использования алгоритма~\ref{alg:alg1}:
+
+\begin{figure}
+\begin{minipage}{\linewidth}
+\begin{algorithm}[H]  
+    \SetAlgoVlined
     \KwData{Входные данные}
     \KwResult{Как прочитать книгу }
     инициализация;
@@ -16,16 +21,22 @@
             перейти к началу текущей главы;
         }
     } 
-    \caption{Как прочитать книгу}
-    \label{alg1}
 \end{algorithm}
+\end{minipage}
+\caption{Как прочитать книгу}
+\label{alg:alg1}
+\end{figure}
 
 \lipsum[1][1]
 
+\pagebreak
+
 Ещё один пример~\ref{alg:generalGP}:
- 
-\begin{algorithm}[htp!]
-	\SetAlgoLined %% Это соединяет линиями логические части
+
+\begin{figure}
+\begin{minipage}{\linewidth}
+\begin{algorithm}[H]
+	\SetAlgoVlined %% Это соединяет линиями логические части
 	%% алгоритма типа if-then-else
 	
 	\KwData{ experiment.data} %% здесь можно указать исходные параметры
@@ -33,7 +44,7 @@
 	x=0;
 	\While{ $\tau_{norm} > \varepsilon_{tol}$ }{
 		$s_{k-1} \leftarrow x_k - x_{k-1}$;
-		// Step lenght computation: %% это комментарий, который будет виден.
+		\tcc*[l]{Step lenght computation:} %% это комментарий, который будет виден.
 		\eIf{$k$ is even}{
 			$ \alpha_k^{ABB} = \frac{ s_{k-1}^T y_{k-1}}{y_{k-1}^T y_{k-1}}$
 		}{ %% ELSE
@@ -43,11 +54,13 @@
 	\For{ i = 1}{
 		$x_{i+1} = P_\Omega(x_i - \alpha_k^{ABB}*g_k)$;
 	} %% END For{ i = 1}{
-	// Compute the termination constant %% это комментарий, который будет виден.
+	\tcc*[l]{Compute the termination constant} %% это комментарий, который будет виден.
 	$\tau_{norm} = abs ( ||x_{k}||_2 - ||x_{k-1}||_2)$
 } %% END While{ $\tau_{norm} > \varepsilon_{tol}$ }{
+\end{algorithm}
+\end{minipage}
 \caption{Псевдо-код алгоритма}
 \label{alg:generalGP}
-\end{algorithm}
+\end{figure}
 
 Цитирование источника 2 \cite{cite_1_10}.

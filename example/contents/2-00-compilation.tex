@@ -1,9 +1,18 @@
-\section{Компиляция}
+% Название разделов -- все прописные
+\section{КОМПИЛЯЦИЯ}
 
 Шаблон предназначен для сборки с использованием \texttt{latexmk}. Рекомендуемый компилятор --- \texttt{xelatex}:
 
 \begin{verbatim}
-	latexmk -xelatex main.tex
+latexmk -xelatex main.tex
 \end{verbatim}
+
+Директория \texttt{diploma} должна быть достижима от основной директории отчета (скопирована локально или, например, как \texttt{git submodule}). В файле \texttt{.latexmkrc} в переменной \texttt{TEXINPUTS} задается относительный путь от директории отчета до директории \texttt{diploma} (\texttt{//} в конце пути обязательны).
+
+\begin{verbatim}
+ensure_path( 'TEXINPUTS', '..//');
+\end{verbatim}
+
+Если вы используете \href{http://www.overleaf.com}{\texttt{overleaf}}, файл \texttt{.latexmkrc} должен располагаться в корне проекта (путь при этом все еще должен быть задан относительно главного \texttt{tex} файла).
 
 \lipsum[1-2]

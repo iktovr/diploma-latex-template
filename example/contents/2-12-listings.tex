@@ -1,14 +1,23 @@
-\section{Вставка кода}
+\section{ВСТАВКА КОДА}
 
-Хотя код и нужно вставлять в качестве приложений, покажу, как его можно использовать с помощью пакета \texttt{lstlisting}. Это оформлено не по ГОСТ, но я особо-то стандартов на листинги и нет. Если найдёте --- сообщите.
+То же самое касается и исходного кода (для него достаточно просто \texttt{figure}), здесь дополнительно надо следить за тем, чтобы листинг не выходил за пределы одной страницы, так как иллюстрации нельзя разрывать.
 
-\listing[frame=rlbt,language=Python,caption={Пример использования листинга}]{inc/example.py}
+Вставка больших частей кода вообще не рекомендуется, вместо этого можно выделить отдельное приложение для ссылки на репозиторий.
 
-Стоит учесть, что данный стиль листингов не по ГОСТ и подсвечивает синтаксис.
+Листинг~\ref{src:src1} показывает вставку кода из файла:
 
-Следующий листинг показывает разрыв страницы и задание кода сразу в \texttt{tex}-файле:
+\begin{figure}
+\lstinputlisting[language=Python]{inc/example.py}
+\caption{Пример использования листинга}
+\label{src:src1}
+\end{figure}
 
-\begin{lstlisting}[frame=rlbt,language=Python,caption={Длинный листинг}]
+\pagebreak
+
+Следующий листинг~\ref{src:src2} показывает задание кода сразу в \texttt{tex}-файле:
+
+\begin{figure}
+\begin{lstlisting}[language=Python]
 import numpy as np
     
 def incmatrix(genl1,genl2):
@@ -39,3 +48,6 @@ def incmatrix(genl1,genl2):
     
     return M
 \end{lstlisting}
+\caption{Длинный листинг}
+\label{src:src2}
+\end{figure}

@@ -1,0 +1,25 @@
+% Author: CatInCosmicSpace
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{21-math}[2021/03/21 v1.2 Математика]
+
+\RequirePackage{amsthm}
+\theoremstyle{definition}
+
+% Абзацный отступ перед каждой теоремой, определением, etc. 
+\newtheorem{definition}{\hspace{\parindent}Определение}[section]
+\newtheorem{theorem}{\hspace{\parindent}Теорема}[section]
+\newtheorem{corollary}{\hspace{\parindent}Следствие}[theorem]
+\newtheorem{lemma}{\hspace{\parindent}Лемма}[section]
+\newtheorem{example}{\hspace{\parindent}Пример}[section]
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+	\normalfont
+	\topsep6\p@\@plus6\p@ \trivlist
+	\item[\hskip\labelsep\hskip\parindent
+	\itshape
+	#1\@addpunct{.}]\ignorespaces
+}{%
+ 	\qed\endtrivlist
+}
+\makeatother

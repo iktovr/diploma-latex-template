@@ -25,7 +25,7 @@
 \renewcommand{\thestructure}{} % Убрать появление счётчика в содержании
 \titleclass{\structure}{straight}[\section]
 \titleformat{\structure}[hang]{\clearpage\normalfont\bfseries\centering}{}{0em}{}
-\titlespacing*{\structure}{0pt}{0pt}{2\baselineskip}
+\titlespacing*{\structure}{0pt}{0pt}{0.5\baselineskip}
 \titlecontents{structure}{}{}{}{}
 \renewcommand*\l@structure{\@dottedtocline{0}{0mm}{0em}}
 
@@ -45,7 +45,7 @@
 
 % 6.2.4 Если заголовок включает несколько предложений, их разделяют точками. 
 % Переносы слов в заголовках не допускаются.
-\titleformat{\section}[block]{\hspace{\parindent}\normalfont\bfseries\raggedright}{\thesection}{1em}{}
+\titleformat{\section}[block]{\normalfont\bfseries\raggedright\centering}{\thesection}{1em}{}
 \titleformat{\subsection}[block]{\hspace{\parindent}\normalfont\bfseries\raggedright}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}[block]{\hspace{\parindent}\normalfont\bfseries\raggedright}{\thesubsubsection}{1em}{}
 \titleformat{\paragraph}[block]{\hspace{\parindent}\normalfont\bfseries\raggedright}{\theparagraph}{1em}{}

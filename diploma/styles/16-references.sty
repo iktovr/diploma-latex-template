@@ -14,10 +14,25 @@
     bibstyle=gost-numeric,
     citestyle=numeric,
     sorting=none,
-    % refsection=structure,
-    % sorting=ynt,
 ]{biblatex}
+
 \defbibheading{bibliography}[СПИСОК~ИСПОЛЬЗОВАННЫХ~ИСТОЧНИКОВ]{\structure{#1}}
 \addto{\captionsrussian}{%
     \renewcommand{\contentsname}{СОДЕРЖАНИЕ}
 }
+
+% Каждый пункт должен начинаться с абзацного отступа, продолжения на новых строках -- без
+\setlength{\bibhang}{0pt}
+\defbibenvironment{bibliography}
+    {\list
+        {}
+        {\setlength{\leftmargin}{\bibhang}%
+        \setlength{\itemindent}{\parindent}%
+        \setlength{\itemsep}{\bibitemsep}%
+        \setlength{\parsep}{\bibparsep}}}
+    {\endlist}
+    {\item
+        \printtext[labelnumberwidth]{%
+        \printfield{labelprefix}%
+        \printfield{labelnumber}}%
+        \addspace}

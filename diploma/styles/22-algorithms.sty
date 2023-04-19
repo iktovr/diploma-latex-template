@@ -2,8 +2,7 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{22-algorithms}[2021/03/21 v1.2 Алгоритмы]
 
-\RequirePackage[linesnumbered,boxruled]{algorithm2e} 
-\SetAlCapSty{}
+\RequirePackage[linesnumbered,boxed]{algorithm2e} 
 
 % Перевод плагина 
 \SetKwInput{KwData}{Исходные параметры}
@@ -20,7 +19,3 @@
 \SetKwFor{For}{цикл}{выполнять}{конец цикла}
 \SetKwFor{ForEach}{для каждого}{выполнять}{конец цикла}
 \SetKwRepeat{Repeat}{повторять}{до тех пор, пока}
-\SetAlgorithmName{Алгоритм}{алгоритм}{Список алгоритмов}
-\SetAlgoCaptionSeparator{~---}
-% \SetAlgoCaptionLayout{centerline}
-\renewcommand{\@algocf@capt@plain}{above}
