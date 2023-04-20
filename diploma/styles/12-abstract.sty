@@ -19,9 +19,13 @@
 \renewcommand{\abstract}{
     \structure{РЕФЕРАТ}
     
-    \abstractLine \pageref{LastPage} страниц\ifnum
+    \abstractLine\ \pageref{LastPage} страниц\ifnum
     \TotalValue{totalfigures}>0, \TotalValue{totalfigures} рисунков\fi\ifnum
     \TotalValue{totaltables}>0, \TotalValue{totaltables} таблиц\fi\ifnum
     \TotalValue{totalcites}>0, \TotalValue{totalcites} использованных источников\fi\ifnum
     \TotalValue{totalappendices}>0, \TotalValue{totalappendices} приложений\fi
+}
+
+\newcommand\keywords[1]{
+    \foreignlanguage{nohyphenation}{\noindent #1}
 }
