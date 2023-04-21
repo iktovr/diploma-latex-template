@@ -45,11 +45,11 @@
 
 % 6.2.4 Если заголовок включает несколько предложений, их разделяют точками. 
 % Переносы слов в заголовках не допускаются.
-\titleformat{\section}[block]{\normalfont\bfseries\raggedright\centering}{\thesection}{1em}{}
-\titleformat{\subsection}[block]{\hspace{\parindent}\normalfont\bfseries\raggedright}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}[block]{\hspace{\parindent}\normalfont\bfseries\raggedright}{\thesubsubsection}{1em}{}
-\titleformat{\paragraph}[block]{\hspace{\parindent}\normalfont\bfseries\raggedright}{\theparagraph}{1em}{}
-\titleformat{\subparagraph}[block]{\hspace{\parindent}\normalfont\bfseries\raggedright}{\thesubparagraph}{1em}{}
+\titleformat{\section}[block]{\normalfont\bfseries\centering}{\thesection}{0.5em}{} % Заголовки раздела центрированы (локальное требование)
+\titleformat{\subsection}[block]{\hspace{\parindent}\normalfont\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}[block]{\hspace{\parindent}\normalfont\bfseries}{\thesubsubsection}{0.5em}{}
+\titleformat{\paragraph}[block]{\hspace{\parindent}\normalfont\bfseries}{\theparagraph}{0.5em}{}
+\titleformat{\subparagraph}[block]{\hspace{\parindent}\normalfont\bfseries}{\thesubparagraph}{0.5em}{}
 
 \titlespacing*{\section}{0pt}{0pt}{2ex}[2ex]
 \titlespacing*{\subsection}{0pt}{2ex}{2ex}[2ex]

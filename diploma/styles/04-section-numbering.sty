@@ -30,8 +30,19 @@
 % При наличии конкретного числа перечислений допускается перед каждым элементом 
 % перечисления ставить арабские цифры, после которых ставится скобка.
 \RequirePackage{enumitem}
-\AddEnumerateCounter{\Asbuk}{\@Asbuk}{А}
+
+\makeatletter
+\def\asbuk#1{\expandafter\@asbuk\csname c@#1\endcsname}
+\def\@asbuk#1{\ifcase#1\or а\or б\or в\or г\or д\or е\or ж\or и\or к\or л\or м\or 
+н\or п\or р\or с\or т\or у\or ф\or х\or ц\or ш\or щ\or э\or ю\or я\fi}
+
+\def\Asbuk#1{\expandafter\@Asbuk\csname c@#1\endcsname}
+\def\@Asbuk#1{\ifcase#1\or А\or Б\or В\or Г\or Д\or Е\or Ж\or И\or К\or Л\or М\or 
+Н\or П\or Р\or С\or Т\or У\or Ф\or Х\or Ц\or Ш\or Щ\or Э\or Ю\or я\fi}
+\makeatother
+
 \AddEnumerateCounter{\asbuk}{\@asbuk}{а}
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{А}
 
 \setlist[enumerate]{
     leftmargin=\parindent+\labelwidth+\labelsep,

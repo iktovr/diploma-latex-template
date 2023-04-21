@@ -21,7 +21,7 @@ latexmk -xelatex main.tex
 ensure_path( 'TEXINPUTS', '..//');
 ```
 
-Если вы используете [overleaf](http://www.overleaf.com), файл `.latexmkrc` должен располагаться в корне проекта (путь при этом все еще должен быть задан относительно главного `tex` файла).
+Или можете использовать [шаблон в overleaf](https://www.overleaf.com/read/vyqpdcfnhmsy).
 
 Использование чего тут есть:
 
