@@ -12,8 +12,9 @@
     \@starttoc{toc}
 }
 
-\renewcommand*\l@section{\@dottedtocline{0}{0mm}{2em}}
+\titlecontents{structure}{}{}{}{}
 \renewcommand*\l@structure{\@dottedtocline{0}{0mm}{0em}}
+\renewcommand*\l@section{\@dottedtocline{0}{0mm}{2em}}
 % ГОСТ 7.32-2017. Пункт 5.4.1:
 % Обозначения подразделов приводят после абзацного отступа, 
 % равного двум знакам, относительно обозначения разделов.
@@ -26,4 +27,4 @@
 \renewcommand*\l@paragraph{\@dottedtocline{3}{15mm}{5em}}
 
 \setcounter{secnumdepth}{5} % Глубина заголовков - до пятого уровня
-\setcounter{tocdepth}{2}    % Глубина содержания - до второго уровня
+\setcounter{tocdepth}{3}    % Глубина содержания - до третьего уровня

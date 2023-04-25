@@ -6,3 +6,17 @@
 \RequirePackage{amsfonts}
 
 % Настройки по умолчанию в целом соответствуют ГОСТ
+
+% 6.8.1 Уравнения и формулы следует выделять из текста в отдельную строку. Выше и ниже каждой
+% формулы или уравнения должно быть оставлено не менее одной свободной строки. 
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\abovedisplayskip{0pt}
+  \setlength\belowdisplayskip{1em}
+  \setlength\abovedisplayshortskip{0pt}
+  \setlength\belowdisplayshortskip{1em}
+}
+\makeatother
+
+% Несколько формул подряд также разделяются пустой строкой
+\setlength{\jot}{\baselineskip}
