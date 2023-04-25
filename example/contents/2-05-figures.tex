@@ -13,13 +13,35 @@
 
 На рисунке~\ref{fig:fig01} показан логотип МАИ. 
 Также тут видно, что ссылка на рисунок работает.
+
 \begin{figure}
   \includegraphics[scale=0.6]{inc/mai}
   \caption{Логотип МАИ}
   \label{fig:fig01}
 \end{figure}
 
+Также можно использовать \texttt{subfigure}. Для нумерации (а), б), ...) оставляйте пустую подпись. На рисунке~\ref{fig:fig02} показано много логотипов МАИ.
 
-\lipsum[3]
+\begin{figure}
+  \begin{subfigure}[t]{0.3\linewidth}
+    \centering
+    \includegraphics[scale=0.6]{inc/mai}
+    \caption{}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.3\linewidth}
+    \centering
+    \includegraphics[scale=0.6]{inc/mai}
+    \caption{}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.3\linewidth}
+    \centering
+    \includegraphics[scale=0.6]{inc/mai}
+    \caption{}
+  \end{subfigure}
+  \caption{Логотипы МАИ: а) Логотип МАИ; б) Еще один логотип МАИ; в) Снова логотип МАИ}
+  \label{fig:fig02}
+\end{figure}
 
 Цитирование источника 7 \cite{Wikipedia7}.
