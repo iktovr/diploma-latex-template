@@ -15,15 +15,33 @@
 % используются абзацные отступы.
 
 \RequirePackage{lastpage}
+\RequirePackage{refcount}
+
+\newcounter{firstDigit}
+\newcounter{secondDigit}
+
+\def \formatbycnt #1#2#3{%
+    \setcounter{firstDigit}{\intcalcMod{#1}{10}}%
+    \setcounter{secondDigit}{#1 / 10}%
+    \setcounter{secondDigit}{\intcalcMod{\thesecondDigit}{10}}%
+    #1
+    \ifnum \thefirstDigit=1
+        \ifnum \thesecondDigit=1 #3%
+        \else #2%
+        \fi
+    \else
+        #3%
+    \fi
+}
 
 \renewcommand{\abstract}{
     \structure*{РЕФЕРАТ} % реферат не должен быть в содержании
-    
-    \abstractLine\ \pageref{LastPage} страниц\ifnum
-    \TotalValue{totalfigures}>0, \TotalValue{totalfigures} рисунков\fi\ifnum
-    \TotalValue{totaltables}>0, \TotalValue{totaltables} таблиц\fi\ifnum
-    \TotalValue{totalcites}>0, \TotalValue{totalcites} использованных источников\fi\ifnum
-    \TotalValue{totalappendices}>0, \TotalValue{totalappendices} приложений\fi
+
+    \abstractLine\ \formatbycnt{\the\numexpr(\getrefbykeydefault{LastPage}{page}{0})\relax}{страницы}{страниц}%
+    \ifnum \TotalValue{totalfigures}>0, \formatbycnt{\TotalValue{totalfigures}}{рисунка}{рисунков}\fi
+    \ifnum \TotalValue{totaltables}>0, \formatbycnt{\TotalValue{totaltables}}{таблицы}{таблиц}\fi
+    \ifnum \TotalValue{totalcites}>0, \formatbycnt{\TotalValue{totalcites}}{использованного источника}{использованных источников}\fi
+    \ifnum \TotalValue{totalappendices}>0, \formatbycnt{\TotalValue{totalappendices}}{приложения}{приложений}\fi.
 }
 
 \newcommand\keywords[1]{
