@@ -12,13 +12,14 @@
     \SetAlgoVlined
     \KwData{Входные данные}
     \KwResult{Как прочитать книгу }
-    инициализация;
+    инициализация\;
     \While{есть непонятая глава книги}{
-        прочитать текущую главу;
+        прочитать текущую главу\;
         \eIf{понятно}{
-            перейти к следующей главе; текущей главой становится следующая глава;
+            перейти к следующей главе\;
+            текущей главой становится следующая глава\;
         }{
-            перейти к началу текущей главы;
+            перейти к началу текущей главы\;
         }
     } 
 \end{algorithm}
@@ -39,21 +40,21 @@
 	
 	\KwData{ experiment.data} %% здесь можно указать исходные параметры
 	\KwResult{ output, xoptimal } %% результат работы программы
-	x=0;
+	x=0\;
 	\While{ $\tau_{norm} > \varepsilon_{tol}$ }{
-		$s_{k-1} \leftarrow x_k - x_{k-1}$;
-		\tcc*[l]{Step lenght computation:} %% это комментарий, который будет виден.
+		$s_{k-1} \leftarrow x_k - x_{k-1}$\;
+		\tcc{Step lenght computation:} %% это комментарий, который будет виден.
 		\eIf{$k$ is even}{
-			$ \alpha_k^{ABB} = \frac{ s_{k-1}^T y_{k-1}}{y_{k-1}^T y_{k-1}}$
+			$ \alpha_k^{ABB} = \frac{ s_{k-1}^T y_{k-1}}{y_{k-1}^T y_{k-1}}$\;
 		}{ %% ELSE
-		$\alpha_k^{ABB} = \frac{ s_{k-1}^T s_{k-1}}{s_{k-1}^T y_{k-1}}$
+		$\alpha_k^{ABB} = \frac{ s_{k-1}^T s_{k-1}}{s_{k-1}^T y_{k-1}}$\;
 	} %% END eIf{$k$ is even}{
-	$k \leftarrow k + 1$;
+	$k \leftarrow k + 1$\;
 	\For{ i = 1}{
-		$x_{i+1} = P_\Omega(x_i - \alpha_k^{ABB}*g_k)$;
+		$x_{i+1} = P_\Omega(x_i - \alpha_k^{ABB}*g_k)$\;
 	} %% END For{ i = 1}{
-	\tcc*[l]{Compute the termination constant} %% это комментарий, который будет виден.
-	$\tau_{norm} = abs ( ||x_{k}||_2 - ||x_{k-1}||_2)$
+	\tcc{Compute the termination constant} %% это комментарий, который будет виден.
+	$\tau_{norm} = abs ( ||x_{k}||_2 - ||x_{k-1}||_2)$\;
 } %% END While{ $\tau_{norm} > \varepsilon_{tol}$ }{
 \end{algorithm}
 \end{minipage}
