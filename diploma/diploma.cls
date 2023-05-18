@@ -10,11 +10,6 @@
 \def\abbreviationsLine{В настоящей выпускной квалификационной работе бакалавра
 применяют следующие сокращения и обозначения:}
 
-\RequirePackage[T2A]{fontenc}
-\RequirePackage[utf8]{inputenc}
-\RequirePackage[russian]{babel}
-\RequirePackage{hyphsubst}
-
 \RequirePackage{01-base}
 \RequirePackage{02-construction}
 \RequirePackage{03-numbering}

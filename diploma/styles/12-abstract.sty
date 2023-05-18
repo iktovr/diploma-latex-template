@@ -24,12 +24,14 @@
     \setcounter{firstDigit}{\intcalcMod{#1}{10}}%
     \setcounter{secondDigit}{#1 / 10}%
     \setcounter{secondDigit}{\intcalcMod{\thesecondDigit}{10}}%
-    #1
-    \ifnum \thefirstDigit=1
-        \ifnum \thesecondDigit=1 #3%
-        \else #2%
-        \fi
-    \else
+    #1~%
+    \ifnum \thefirstDigit=1%
+        \ifnum \thesecondDigit=1%
+            #3%
+        \else%
+            #2%
+        \fi%
+    \else%
         #3%
     \fi
 }
