@@ -3,7 +3,6 @@
 \ProvidesPackage{14-terms-and-definitions}[2021/03/21 v1.2 Содержание]
 
 \RequirePackage[
-    acronym, 
     automake, 
     nopostdot, 
     xindy={glsnumbers=false, language=russian},
@@ -27,6 +26,17 @@
     \structure{ТЕРМИНЫ~И~ОПРЕДЕЛЕНИЯ}
 
     \termsAndDefinitionsLine
+    
+    \printunsrtglossary[
+        style=terms,
+        nonumberlist
+    ]
+}
+
+\newcommand{\termsandabbreviations}{
+    \structure{ОПРЕДЕЛЕНИЯ,~ОБОЗНАЧЕНИЯ~И~СОКРАЩЕНИЯ}
+
+    \termsAndAbbreviationsLine
     
     \printunsrtglossary[
         style=terms,
