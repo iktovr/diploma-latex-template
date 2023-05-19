@@ -81,17 +81,17 @@
         \fontsize{12pt}{0.1\baselineskip}\selectfont
         \noindent\makebox[\linewidth]{\rule{\textwidth}{1.5pt}} 
     \end{center}
-    \begin{flushleft}
+    \begingroup
         \fontsize{12pt}{16pt}\selectfont
         \textbf{Институт (Филиал)} \uline{\@faculty\hfill} \textbf{Кафедра} \uline{\@department\hfill} \\
         \textbf{Группа} \uline{\@group} \textbf{Направление подготовки} \expandafter\uline\expandafter{\expanded{\@speciality}\hfill} \\
         \textbf{Профиль} \uline{\@profile\hfill} \\
         \textbf{Квалификация:} \uline{\textbf{бакалавр}\hfill} 
-    \end{flushleft}
+    \endgroup
 }
 
 \newcommand\makeTheme[1]{
-    \noindent на тему <<{#1}>>
+    \noindent на тему: {#1}
 }
 
 \newcommand\signature[1]{
