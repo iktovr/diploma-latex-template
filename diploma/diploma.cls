@@ -12,6 +12,8 @@
 \def\termsAndAbbreviationsLine{В настоящей выпускной квалификационной работе бакалавра
 применяют следующие определения, обозначения и сокращения:}
 
+\RequirePackage[russian]{babel}
+
 \RequirePackage{01-base}
 \RequirePackage{02-construction}
 \RequirePackage{03-numbering}
