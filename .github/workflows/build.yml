@@ -1,7 +1,7 @@
 name: Build
 
 env:
-  DOCKER_IMAGE: ghcr.io/afaikiac/diploma-latex-template:latest
+  DOCKER_IMAGE: ghcr.io/iktovr/diploma-latex-template:latest
   DOCKER_WORKDIR: /doc
 
   STYLES_PATH: diploma

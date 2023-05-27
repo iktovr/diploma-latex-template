@@ -5,7 +5,7 @@ RUN apk --update add msttcorefonts-installer \
 
 FROM debian:bookworm AS doc-builder
 
-LABEL org.opencontainers.image.source="https://github.com/afaikiac/diploma-latex-template"
+LABEL org.opencontainers.image.source="https://github.com/iktovr/diploma-latex-template"
 LABEL org.opencontainers.image.description="Container image for building LaTeX documents"
 LABEL org.opencontainers.image.licenses="GPL-3.0"
 
