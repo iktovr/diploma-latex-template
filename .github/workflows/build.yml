@@ -1,0 +1,103 @@
+name: Build
+
+env:
+  DOCKER_IMAGE: ghcr.io/iktovr/diploma-latex-template:latest
+  DOCKER_WORKDIR: /doc
+
+  STYLES_PATH: diploma
+  EXAMPLE_PATH: example
+  EXAMPLE_STYLES_PATH: styles
+
+  RUN_LATEXMK_XELATEX: true
+  LATEXMK_XELATEX_JOBNAME: ${{ github.event.repository.name }}-xelatex
+
+  CREATE_OVERLEAF_ARCHIVE: true
+  OVERLEAF_ARCHIVE: ${{ github.event.repository.name }}-overleaf.zip
+
+  ARTIFACT_NAME: artifact
+  RELEASE_BODY: |
+    Release from commit: ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    name: Compile PDF
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Prepare
+      if: ${{ env.RUN_LATEXMK_XELATEX == 'true' }}
+      run: |
+        cp -r ${{ env.STYLES_PATH }} ${{ env.EXAMPLE_PATH }}/${{ env.EXAMPLE_STYLES_PATH }}
+
+    - name: Compile PDF with XeLaTeX
+      if: ${{ env.RUN_LATEXMK_XELATEX == 'true' }}
+      run: |
+        cd ${{ env.EXAMPLE_PATH }}
+        docker run --net=none -v $PWD:${{ env.DOCKER_WORKDIR }} ${{ env.DOCKER_IMAGE }} \
+          latexmk -pdfxe -jobname=${{ env.LATEXMK_XELATEX_JOBNAME }}
+
+    - name: Archive Built PDF
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+        path: example/${{ env.LATEXMK_XELATEX_JOBNAME }}.pdf
+        if-no-files-found: ignore
+
+  release:
+    name: Create GitHub Release
+    if: ${{ github.ref_name == github.event.repository.default_branch }}
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set Tag Name
+      id: tag
+      run: |
+        tag=v$(date +%Y%m%d.%H%M%S)
+        echo "tag=$tag" >> $GITHUB_OUTPUT
+
+    - name: Create Release
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_REPO: ${{ github.repository }}
+      run: |
+        tag="${{ steps.tag.outputs.tag }}"
+        body="${{ env.RELEASE_BODY }}"
+        gh release create --draft "$tag" --title "$tag" --notes "$body"
+
+    - name: Download all workflow run artifacts
+      if: ${{ env.RUN_LATEXMK_XELATEX == 'true' }}
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+        path: artifacts
+
+    - name: Upload Built PDF with XeLaTeX
+      if: ${{ env.RUN_LATEXMK_XELATEX == 'true' }}
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_REPO: ${{ github.repository }}
+      working-directory: artifacts
+      run: gh release upload "${{ steps.tag.outputs.tag }}" "${{ env.LATEXMK_XELATEX_JOBNAME }}.pdf"
+
+    - name: Checkout Code
+      if: ${{ env.CREATE_OVERLEAF_ARCHIVE == 'true' }}
+      uses: actions/checkout@v3
+
+    - name: Upload Archive for Overleaf
+      if: ${{ env.CREATE_OVERLEAF_ARCHIVE == 'true' }}
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_REPO: ${{ github.repository }}
+      run: |
+        cp -r ${{ env.STYLES_PATH }} ${{ env.EXAMPLE_PATH }}/${{ env.EXAMPLE_STYLES_PATH }}
+        cd ${{ env.EXAMPLE_PATH }}
+        zip -r ${{ env.OVERLEAF_ARCHIVE }} ./
+        gh release upload "${{ steps.tag.outputs.tag }}" "${{ env.OVERLEAF_ARCHIVE }}"

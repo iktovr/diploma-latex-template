@@ -28,10 +28,10 @@ x'_n &= \frac{x_{n-2} - 4 x_{n-1} + 3 x_n}{2 \tau}
 3x^2 + 9y =  3a + c
 \end{gather}
 
-Формула на нескольких строках в окружении \texttt{split}. По умолчанию здесь тоже будет большое расстояние между строками. Чтобы этого избежать используйте команду \texttt{\textbackslash setlength\{\textbackslash jot\}\{3pt\}} внутри \texttt{equation}:
+Формула на нескольких строках в окружении \texttt{split}. По умолчанию здесь тоже будет большое расстояние между строками. Чтобы этого избежать используйте команду \texttt{\textbackslash normalspacing} внутри \texttt{equation}:
 
 \begin{equation}
-\setlength{\jot}{3pt}
+\normalspacing
 \begin{split}
 F = {} &\{F_{x} \in  F_{c} : (|S| > |C|) \cap {} \\
 & \cap (\mathrm{minPixels}  < |S| < \mathrm{maxPixels}) \cap {} \\
