@@ -3,7 +3,9 @@
 \ProvidesPackage{17-appendices}[2021/03/21 v1.2 Приложения]
 
 \renewcommand{\appendix}{
-    \renewcommand\section{\clearpage\@startsection{section}{1}{0pt}{0.5em}{0.5em}{\bfseries\centering ПРИЛОЖЕНИЕ~}}
+    \titleformat{\section}[block]{\normalfont\bfseries\centering ПРИЛОЖЕНИЕ~}{\thesection}{}{}
+    \titlespacing*{\section}{0pt}{0pt}{0pt}[2ex]
+    
     \renewcommand\thefigure{\Asbuk{apps}.\arabic{figure}} 
     \renewcommand\thetable{\Asbuk{apps}.\arabic{table}} 
     \renewcommand\theequation{\Asbuk{apps}.\arabic{equation}} 
