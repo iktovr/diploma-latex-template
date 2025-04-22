@@ -45,7 +45,7 @@ jobs:
           latexmk -pdfxe -jobname=${{ env.LATEXMK_XELATEX_JOBNAME }}
 
     - name: Archive Built PDF
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ env.ARTIFACT_NAME }}
         path: example/${{ env.LATEXMK_XELATEX_JOBNAME }}.pdf
