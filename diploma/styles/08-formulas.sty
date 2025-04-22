@@ -19,7 +19,14 @@
 \makeatother
 
 % Несколько формул подряд также разделяются пустой строкой
-\setlength{\jot}{\baselineskip}
+\def\increaseFormulasSpacing{\setlength{\jot}{\baselineskip}}
+\increaseFormulasSpacing
 
 % Команда для восстановления стандартного расстояния между формулами
-\def\normalspacing{\setlength{\jot}{3pt}}
+\def\restoreFormulasSpacing{\setlength{\jot}{3pt}}
+
+% Автоматическое уменьшение расстояния между формулами для многострочных формул
+\AddToHook{env/split/before}{\restoreFormulasSpacing}
+\AddToHook{env/split/after}{\increaseFormulasSpacing}
+
+\AddToHook{env/multline/begin}{\restoreFormulasSpacing}

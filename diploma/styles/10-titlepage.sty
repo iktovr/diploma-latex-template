@@ -21,14 +21,14 @@
 \def\supervisor#1{\gdef\@supervisor{#1}}
 \def\@supervisor{\@latex@warning@no@line{No \noexpand\supervisor given}}
 
+\def\@firstConsultant{}
 \def\firstConsultant#1{\gdef\@firstConsultant{#1}}
-\def\@firstConsultant{\@latex@warning@no@line{No \noexpand\firstConsultant given}}
 
+\def\@secondConsultant{}
 \def\secondConsultant#1{\gdef\@secondConsultant{#1}}
-\def\@secondConsultant{\@latex@warning@no@line{No \noexpand\secondConsultant given}}
 
+\def\@reviewer{}
 \def\reviewer#1{\gdef\@reviewer{#1}}
-\def\@reviewer{\@latex@warning@no@line{No \noexpand\reviewer given}}
 
 \def\headOfDepartment#1{\gdef\@headOfDepartment{#1}}
 \def\@headOfDepartment{\@latex@warning@no@line{No \noexpand\headOfDepartment given}}
@@ -77,21 +77,22 @@
             (национальный исследовательский университет)>>
         \end{center}
     \end{minipage}
-    \begin{center}
-        \fontsize{12pt}{0.1\baselineskip}\selectfont
-        \noindent\makebox[\linewidth]{\rule{\textwidth}{1.5pt}} 
-    \end{center}
+
+    \noindent\parbox[t][24pt][c]{\textwidth}{\rule{\textwidth}{1.5pt}}
+
     \begingroup
         \fontsize{12pt}{16pt}\selectfont
+        \noindent
         \textbf{Институт (Филиал)} \uline{\@faculty\hfill} \textbf{Кафедра} \uline{\@department\hfill} \\
         \textbf{Группа} \uline{\@group} \textbf{Направление подготовки} \expandafter\uline\expandafter{\expanded{\@speciality}\hfill} \\
-        \textbf{Профиль} \uline{\@profile\hfill} \\
-        \textbf{Квалификация:} \uline{\textbf{бакалавр}\hfill} 
+        \textbf{\profileType} \uline{\@profile\hfill} \\
+        \textbf{Квалификация:} \uline{\textbf{\degree}\hfill} 
     \endgroup
 }
 
 \newcommand\makeTheme[1]{
-    \noindent на тему: {#1}
+    \noindent На тему:
+    \expandafter\uline\expandafter{\expanded{#1}\hfill}
 }
 
 \newcommand\signature[1]{
@@ -99,44 +100,42 @@
 }
 
 \newcommand\fillTitle{
+    \fontsize{12pt}{14pt}\selectfont
     \vfill
 
-    \noindent\begin{center}
-        \centering\bfseries\fontsize{16pt}{18pt}\selectfont 
-        ВЫПУСКНАЯ КВАЛИФИКАЦИОННАЯ РАБОТА \\
-        БАКАЛАВРА
-    \end{center}
+    % немного короче текста, чтобы добиться переноса последнего слова
+    \begin{minipage}{0.9\textwidth}
+        \centering\bfseries\fontsize{16pt}{18pt}\selectfont
+        \MakeUppercase{\workName}
+    \end{minipage}
 
     \vfill
 
     \makeTheme{\@theme}
 
-    \vspace{28pt}
+    \vspace{2cm}
     
-    {
-        \fontsize{12pt}{14pt}\selectfont
+    \begingroup
         \setlength{\tabcolsep}{0pt}
         \renewcommand{\arraystretch}{1.2}
-        \noindent \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}Xr}
-            \noindent Автор ВКРБ:   & \hspace{2cm} \@student          & \signature{3.5cm} \\
-            \noindent Руководитель: & \hspace{2cm} \@supervisor       & \signature{3.5cm} \\
-            \noindent Консультант:  & \hspace{2cm} \@firstConsultant  & \signature{3.5cm} \\
-            \noindent Консультант:  & \hspace{2cm} \@secondConsultant & \signature{3.5cm} \\
-            \noindent Рецензент:    & \hspace{2cm} \@reviewer         & \signature{3.5cm} \\
+        \noindent\begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}Xr}
+            \noindent Автор \workNameShort: \uline{\hfill} & \uline{\hspace{2cm} \@student          \hfill} & \signature{2cm} \\
+            \noindent \supervisorType:      \uline{\hfill} & \uline{\hspace{2cm} \@supervisor       \hfill} & \signature{2cm} \\
+            \noindent Консультант:          \uline{\hfill} & \uline{\hspace{2cm} \@firstConsultant  \hfill} & \signature{2cm} \\
+            \noindent Консультант:          \uline{\hfill} & \uline{\hspace{2cm} \@secondConsultant \hfill} & \signature{2cm} \\
+            \noindent Рецензент:            \uline{\hfill} & \uline{\hspace{2cm} \@reviewer         \hfill} & \signature{2cm} \\
         \end{tabularx}
+    \endgroup
 
-        \vspace{28pt}
+    \vspace{2cm}
 
-        \noindent \textbf{К защите допустить}
+    \noindent \textbf{К защите допустить}
 
-        \noindent Заведующий кафедрой \@departmentFullName \hfill \@headOfDepartment \hfill \signature{3.5cm}
-        
-        \noindent \@date
-    }
+    \noindent Заведующий кафедрой \@departmentFullName\ \uline{\hfill \@headOfDepartment \hfill}\ \signature{2cm}
+    
+    \noindent \@date
 
-    \vfill 
-
-    \clearpage
+    \vspace{2cm}
 }
 
 \renewcommand\maketitle{
