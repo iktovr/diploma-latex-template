@@ -2,16 +2,36 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{diploma}[2020/06/01 Report template class]
 
+\DeclareKeys[diploma]{
+    fontsize.store = \@fontsize,
+    bachelor.if = @bachelor,
+    master.if = @master
+}
+\SetKeys[diploma]{
+    fontsize = 14pt,
+    bachelor
+}
+\ProcessKeyOptions[diploma]\relax
+
+\if@bachelor
+    \def\degree{бакалавр}
+    \def\workName{выпускная квалификационная работа бакалавра}
+    \def\workNameIn{выпускной квалификационной работе бакалавра}
+    \def\workNameShort{ВКРБ}
+    \def\profileType{Профиль}
+    \def\supervisorType{Руководитель}
+\fi
+
+\if@master
+    \def\degree{магистр}
+    \def\workName{выпускная квалификационная работа магистра}
+    \def\workNameIn{выпускной квалификационной работе магистра}
+    \def\workNameShort{ВКРМ}
+    \def\profileType{Магистерская программа}
+    \def\supervisorType{Научный руководитель}
+\fi
+
 \LoadClass{article}
-
-\def\abstractLine{Выпускная квалификационная работа бакалавра состоит из}
-\def\termsAndDefinitionsLine{В настоящей выпускной квалификационной работе бакалавра
-применяют следующие термины с соответствующими определениями:}
-\def\abbreviationsLine{В настоящей выпускной квалификационной работе бакалавра
-применяют следующие сокращения и обозначения:}
-\def\termsAndAbbreviationsLine{В настоящей выпускной квалификационной работе бакалавра
-применяют следующие определения, обозначения и сокращения:}
-
 \RequirePackage[russian]{babel}
 
 \RequirePackage{01-base}
