@@ -5,15 +5,26 @@
 \RequirePackage{listings}
 \RequirePackage{xcolor}
 
+\definecolor{codegreen}{rgb}{0.0,0.45,0.0}
+\definecolor{codegray}{rgb}{0.45,0.45,0.45}
+\definecolor{codepurple}{rgb}{0.58,0.0,0.82}
+\definecolor{codeblue}{rgb}{0.0,0.2,0.7}
+\definecolor{backcolour}{rgb}{0.97,0.97,0.95}
+
 \lstdefinestyle{codestyle}{
     frame=single,
     basicstyle=\ttfamily\footnotesize,
     numbers=left,
+    numberstyle=\color{codegray},
     breakatwhitespace=false,
     showstringspaces=false,
     breaklines=true,
     keepspaces=true,
     extendedchars=\true,
     tabsize=2,
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codeblue},
+    stringstyle=\color{codepurple},
 }
 \lstset{style=codestyle}
