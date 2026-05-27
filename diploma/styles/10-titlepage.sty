@@ -33,6 +33,9 @@
 \def\headOfDepartment#1{\gdef\@headOfDepartment{#1}}
 \def\@headOfDepartment{\@latex@warning@no@line{No \noexpand\headOfDepartment given}}
 
+\def\headOfDepartmentTitle#1{\gdef\@headOfDepartmentTitle{#1}}
+\def\@headOfDepartmentTitle{\@latex@warning@no@line{No \noexpand\headOfDepartmentTitle given}}
+
 \def\departmentFullName#1{\gdef\@departmentFullName{#1}}
 \def\@departmentFullName{\@latex@warning@no@line{No \noexpand\departmentFullName given}}
 
@@ -132,7 +135,7 @@
 
     \noindent \textbf{К защите допустить}
 
-    \noindent Заведующий кафедрой \@departmentFullName\ \uline{\hfill \@headOfDepartment \hfill}\ \signature{2cm}
+    \noindent \@headOfDepartmentTitle \@departmentFullName\ \uline{\hfill \@headOfDepartment \hfill}\ \signature{2cm}
     
     \noindent \@date
 

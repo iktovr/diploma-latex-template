@@ -6,6 +6,7 @@
     \titleformat{\section}[block]{\normalfont\bfseries\centering ПРИЛОЖЕНИЕ~}{\thesection}{}{}
     \titlespacing*{\section}{0pt}{0pt}{0pt}[2ex]
     
+    \renewcommand\theapps{\Asbuk{apps}} 
     \renewcommand\thefigure{\Asbuk{apps}.\arabic{figure}} 
     \renewcommand\thetable{\Asbuk{apps}.\arabic{table}} 
     \renewcommand\theequation{\Asbuk{apps}.\arabic{equation}} 
@@ -13,7 +14,7 @@
 }
 
 \newcommand{\appendixsection}[1]{
-    \stepcounter{apps}
+    \refstepcounter{apps}
     \section*{\Asbuk{apps}}
     \begin{center}
         \bfseries #1
