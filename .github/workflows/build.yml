@@ -42,7 +42,7 @@ jobs:
       run: |
         cd ${{ env.EXAMPLE_PATH }}
         docker run --net=none -v $PWD:${{ env.DOCKER_WORKDIR }} ${{ env.DOCKER_IMAGE }} \
-          latexmk -pdfxe -jobname=${{ env.LATEXMK_XELATEX_JOBNAME }}
+          latexmk -pdfxe -jobname=${{ env.LATEXMK_XELATEX_JOBNAME }} main.tex
 
     - name: Archive Built PDF
       uses: actions/upload-artifact@v4

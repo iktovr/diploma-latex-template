@@ -2,115 +2,183 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{10-titlepage}[2021/03/21 v1.2 Титульный лист]
 
-% Поля для заполнения для ВКР
-\def\student#1{\gdef\@student{#1}}
-\def\@student{\@latex@warning@no@line{No \noexpand\student given}}
+\RequirePackage{expl3}
+\RequirePackage{xstring}
+\RequirePackage{etoolbox}
 
-\def\theme#1{\gdef\@theme{#1}}
-\def\@theme{\@latex@warning@no@line{No \noexpand\theme given}}
+\newcommand{\@makeVariableDefault}[2][warning]{
+    \ifstrequal{#1}{warning}{
+        \expandafter\newcommand\expandafter*\csname @#2\endcsname{
+            \@latex@warning@no@line{No \detokenize{#2} given}
+        }
+    }{
+        \ifstrequal{#1}{empty}{
+            \expandafter\newcommand\expandafter*\csname @#2\endcsname{}
+        }{
+        \ifstrequal{#1}{}{
+            \expandafter\newcommand\expandafter*\csname @#2\endcsname{}
+        }{
+            \expandafter\newcommand\expandafter*\csname @#2\endcsname{#1}
+        }
+        }
+    }
+}
 
-\def\group#1{\gdef\@group{#1}}
-\def\@group{\@latex@warning@no@line{No \noexpand\group given}}
+\newcommand{\@makeVariable}[2][warning]{
+    \expandafter\newcommand\expandafter*\csname #2\endcsname[1]{
+        \expandafter\renewcommand\expandafter*\csname @#2\endcsname{##1}
+    }
+    \@makeVariableDefault[#1]{#2}
+}
 
-\def\department#1{\gdef\@department{#1}}
-\def\@department{\@latex@warning@no@line{No \noexpand\department given}}
+\ExplSyntaxOn
+\newcommand{\makeShortname}[1]{
+    \seq_set_split:Nnn \l_tmpa_seq { ~ } { #1 }
+    \int_compare:nNnTF { \seq_count:N \l_tmpa_seq } = { 1 }
+        { #1 }
+        {
+        \seq_pop_left:NN \l_tmpa_seq \l_tmpa_first
+        \tl_clear:N \l_tmpa_tl
+        \seq_map_inline:Nn \l_tmpa_seq
+            {
+            \tl_put_right:Nx \l_tmpa_tl { \tl_head:n { ##1 } . }
+            }
+        \tl_put_right:Nx \l_tmpa_tl {\nobreakspace \l_tmpa_first}
+        \tl_use:N \l_tmpa_tl
+        }
+    }
+\ExplSyntaxOff
 
-\def\faculty#1{\gdef\@faculty{#1}}
-\def\@faculty{\@latex@warning@no@line{No \noexpand\faculty given}}
+\newcommand{\@makeVariableWithShortname}[2][warning]{
+    \expandafter\newcommand\expandafter*\csname #2\endcsname[2][]{
+        \expandafter\renewcommand\expandafter*\csname @#2\endcsname{##2}
+        \def\temp{##1}
+        \ifx\@empty\temp
+            \expandafter\renewcommand\expandafter*\csname @#2Short\endcsname{\makeShortname{##2}}
+        \else
+            \expandafter\renewcommand\expandafter*\csname @#2Short\endcsname{##1}
+        \fi
+    }
+    \@makeVariableDefault[#1]{#2}
+    \@makeVariableDefault[#1]{#2Short}
+}
 
-\def\supervisor#1{\gdef\@supervisor{#1}}
-\def\@supervisor{\@latex@warning@no@line{No \noexpand\supervisor given}}
+\newcommand{\@fullname}[1]{
+    \csname @#1\endcsname
+}
 
-\def\@firstConsultant{}
-\def\firstConsultant#1{\gdef\@firstConsultant{#1}}
+\newcommand{\@shortname}[1]{
+    \csname @#1Short\endcsname
+}
 
-\def\@secondConsultant{}
-\def\secondConsultant#1{\gdef\@secondConsultant{#1}}
+\newcommand{\@credentials}[1]{
+    \csname @#1Credentials\endcsname
+}
 
-\def\@reviewer{}
-\def\reviewer#1{\gdef\@reviewer{#1}}
+% Поля для заполнения в ВКР
+% Информация о студенте
+\@makeVariableWithShortname{student}
+\@makeVariable{faculty}
+\@makeVariable{department}
+\@makeVariable{group}
+\@makeVariable{profile}
+\@makeVariable{speciality}
 
-\def\headOfDepartment#1{\gdef\@headOfDepartment{#1}}
-\def\@headOfDepartment{\@latex@warning@no@line{No \noexpand\headOfDepartment given}}
+% Информация о работе
+\@makeVariable{theme}
+\@makeVariable{workDate}
+\@makeVariable[empty]{similarityPercentage}
 
-\def\headOfDepartmentTitle#1{\gdef\@headOfDepartmentTitle{#1}}
-\def\@headOfDepartmentTitle{\@latex@warning@no@line{No \noexpand\headOfDepartmentTitle given}}
+% Информация об экспертах
+\@makeVariableWithShortname{supervisor}
+\@makeVariable[empty]{supervisorCredentials}
 
-\def\departmentFullName#1{\gdef\@departmentFullName{#1}}
-\def\@departmentFullName{\@latex@warning@no@line{No \noexpand\departmentFullName given}}
+\@makeVariableWithShortname[empty]{firstConsultant}
+\@makeVariable[empty]{firstConsultantCredentials}
 
-\def\profile#1{\gdef\@profile{#1}}
-\def\@profile{\@latex@warning@no@line{No \noexpand\profile given}}
+\@makeVariableWithShortname[empty]{secondConsultant}
+\@makeVariable[empty]{secondConsultantCredentials}
 
-\def\speciality#1{\gdef\@speciality{#1}}
-\def\@speciality{\@latex@warning@no@line{No \noexpand\speciality given}}
+\@makeVariableWithShortname[empty]{reviewer}
+\@makeVariable[empty]{reviewerCredentials}
 
-\def\date#1{\gdef\@date{#1}}
-\def\@date{\@latex@warning@no@line{No \noexpand\date given}}
+% Информация об институте
+\@makeVariableWithShortname{headOfDepartment}
+\@makeVariable{headOfDepartmentTitle}
+
+% Названия различных полей
+\@makeVariable{degree}
+\@makeVariable{workType}
+\@makeVariable{workTypeDat}
+\@makeVariable{workTypeAcc}
+\@makeVariable{workTypeShort}
+\@makeVariable{profileType}
+\@makeVariable{supervisorType}
+\@makeVariable{departmentType}
+
 
 \RequirePackage{fancyhdr}
 \fancypagestyle{year}{
-  \fancyfoot[C]{Москва \the\year}
-  \renewcommand{\headrulewidth}{0pt}
-  \fancyhead{}
+    \fancyfoot[C]{Москва \the\year}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead{}
 }
 
 \RequirePackage{tabto}
 \RequirePackage[normalem]{ulem}
 \RequirePackage[usestackEOL]{stackengine}
 \RequirePackage{lineno}
-\RequirePackage{xstring}
 \RequirePackage{ifthen}
+\RequirePackage{varwidth}
 
-\newcommand\makeHeader{
+\newcommand{\makeHeader}{
     \noindent\begin{minipage}{0.05\textwidth}
         \includegraphics[scale=0.4]{inc/mai.pdf}
     \end{minipage}
     \hfill
     \begin{minipage}{0.85\textwidth}\raggedleft
         \begin{center}
-            \fontsize{11pt}{10pt}\selectfont 
+            \fontsize{11pt}{10pt}\selectfont
             \textbf{МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ \\
-                РОССИЙСКОЙ ФЕДЕРАЦИИ \\ 
+                РОССИЙСКОЙ ФЕДЕРАЦИИ \\
                 \hfill\break
                 ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ \\
-                ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ \\ 
+                ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ \\
                 <<МОСКОВСКИЙ АВИАЦИОННЫЙ ИНСТИТУТ
             } \\
             (национальный исследовательский университет)>>
         \end{center}
-    \end{minipage}
-
+    \end{minipage}\\
     \noindent\parbox[t][24pt][c]{\textwidth}{\rule{\textwidth}{1.5pt}}
-
-    \begingroup
-        \fontsize{12pt}{16pt}\selectfont
-        \noindent
-        \textbf{Институт (Филиал)} \uline{\@faculty\hfill} \\
-        \textbf{Образовательный центр} \uline{\@department\hfill} \\
-        \textbf{Группа} \uline{\@group} \textbf{Направление подготовки} \expandafter\uline\expandafter{\expanded{\@speciality}\hfill} \\
-        \textbf{\profileType} \uline{\@profile\hfill} \\
-        \textbf{Квалификация:} \uline{\textbf{\degree}\hfill} 
-    \endgroup
 }
 
-\newcommand\makeTheme[1]{
+\newcommand{\makeAffiliations}{
+    \fontsize{12pt}{16pt}\selectfont
+    \noindent
+    \textbf{Институт (Филиал)} \uline{\@faculty\hfill} \\
+    \textbf{\@departmentType} \uline{\@department\hfill} \\
+    \textbf{Группа} \uline{\@group} \textbf{Направление подготовки} \expandafter\uline\expandafter{\expanded{\@speciality}\hfill} \\
+    \textbf{\@profileType} \uline{\@profile\hfill} \\
+    \textbf{Квалификация:} \uline{\textbf{\@degree}\hfill}
+}
+
+\newcommand{\makeTheme}[1]{
     \noindent На тему:
     \expandafter\uline\expandafter{\expanded{#1}\hfill}
 }
 
-\newcommand\signature[1]{
+\newcommand{\signature}[1]{
     (\uline{\hspace{#1}})
 }
 
-\newcommand\fillTitle{
+\newcommand{\fillTitle}{
     \fontsize{12pt}{14pt}\selectfont
     \vfill
 
     % немного короче текста, чтобы добиться переноса последнего слова
     \begin{minipage}{0.9\textwidth}
         \centering\bfseries\fontsize{16pt}{18pt}\selectfont
-        \MakeUppercase{\workName}
+        \MakeUppercase{\@workType}
     \end{minipage}
 
     \vfill
@@ -118,16 +186,16 @@
     \makeTheme{\@theme}
 
     \vspace{2cm}
-    
+
     \begingroup
         \setlength{\tabcolsep}{0pt}
         \renewcommand{\arraystretch}{1.2}
         \noindent\begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}Xr}
-            \noindent Автор \workNameShort: \uline{\hfill} & \uline{\hspace{2cm} \@student          \hfill} & \signature{2cm} \\
-            \noindent \supervisorType:      \uline{\hfill} & \uline{\hspace{2cm} \@supervisor       \hfill} & \signature{2cm} \\
-            \noindent Консультант:          \uline{\hfill} & \uline{\hspace{2cm} \@firstConsultant  \hfill} & \signature{2cm} \\
-            \noindent Консультант:          \uline{\hfill} & \uline{\hspace{2cm} \@secondConsultant \hfill} & \signature{2cm} \\
-            \noindent Рецензент:            \uline{\hfill} & \uline{\hspace{2cm} \@reviewer         \hfill} & \signature{2cm} \\
+            \noindent Автор \@workTypeShort: \uline{\hfill} & \uline{\hspace{2cm} \@student          \hfill} & \signature{2cm} \\
+            \noindent \@supervisorType:      \uline{\hfill} & \uline{\hspace{2cm} \@supervisor       \hfill} & \signature{2cm} \\
+            \noindent Консультант:           \uline{\hfill} & \uline{\hspace{2cm} \@firstConsultant  \hfill} & \signature{2cm} \\
+            \noindent Консультант:           \uline{\hfill} & \uline{\hspace{2cm} \@secondConsultant \hfill} & \signature{2cm} \\
+            \noindent Рецензент:             \uline{\hfill} & \uline{\hspace{2cm} \@reviewer         \hfill} & \signature{2cm} \\
         \end{tabularx}
     \endgroup
 
@@ -135,17 +203,21 @@
 
     \noindent \textbf{К защите допустить}
 
-    \noindent \@headOfDepartmentTitle \@departmentFullName\ \uline{\hfill \@headOfDepartment \hfill}\ \signature{2cm}
-    
-    \noindent \@date
+    \medskip
+
+    \noindent \parbox[b]{0.4\textwidth}{\@headOfDepartmentTitle}\ \uline{\hfill \@headOfDepartment \hfill}\ \signature{2cm}
+
+    \noindent \@workDate
 
     \vspace{2cm}
 }
 
-\renewcommand\maketitle{
-    \begin{titlepage}        
+\renewcommand{\maketitle}{
+    \begin{titlepage}
         \thispagestyle{year}
         \makeHeader
+
+        \makeAffiliations
 
         \fillTitle
 

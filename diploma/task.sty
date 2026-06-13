@@ -1,0 +1,78 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{diploma-task}[2026/06/12 v1.0 Задание на ВКР]
+
+\RequirePackage{nopageno}
+\RequirePackage{makecell}
+\RequirePackage{parskip}
+
+\setlength{\parindent}{0cm} % нет абзацного отступа
+\setlength{\intextsep}{0pt} % убирает большие пробелы до/после таблиц
+
+% В fullcite добавлена нумерация
+\DeclareCiteCommand{\fullcite}
+    {\usebibmacro{prenote}}
+    {
+        {\printtext[labelnumberwidth]{
+            \printfield{prefixnumber}
+            \printfield{labelnumber}}}
+            \usedriver
+        {\DeclareNameAlias{sortname}{default}}
+        {\thefield{entrytype}}
+    }
+    {\multicitedelim}
+    {\usebibmacro{postnote}}
+
+
+\newcommand{\makeThemeLine}{
+    \textbf{Наименование темы} \expandafter\uline\expandafter{\expanded{\@theme}\hfill}
+}
+
+\newcommand{\makeSupervisorLine}{
+    \textbf{Руководитель} \uline{\@supervisor,\hfill}\\
+    \uline{\@supervisorCredentials\hfill}
+}
+
+\newcommand{\makeStudentLine}{
+    \textbf{Обучающийся} \uline{\@student\hfill}
+}
+
+\newcommand{\makeHeadOfDepartmentSignature}{
+    \bigskip
+    \begin{flushright}
+        \fontsize{12pt}{14pt}\selectfont
+        \textbf{УТВЕРЖДАЮ}\hspace*{3.5cm} \\
+        \@headOfDepartmentTitle\ \uline{\hspace{1.5cm}}\ \@headOfDepartmentShort \\
+        \uline{\hspace{1cm}}\ \uline{\hspace{2cm}}\ \the\year{г.}
+    \end{flushright}
+}
+
+\newcommand{\makeTaskSignatures}{
+    \hfill
+    \begin{minipage}[t]{0.7\textwidth}
+        Руководитель\ \uline{\hfill}
+
+        \bigskip
+
+        Задание принял к исполнению\ \uline{\hfill}
+    \end{minipage}
+}
+
+\newcommand\makeTitle[1]{
+    \begin{center}
+        \bfseries\fontsize{18pt}{20pt}\selectfont 
+        #1
+    \end{center}
+}
+
+\newcommand{\fillTaskHeader}{
+    \makeHeader
+    \makeAffiliations
+
+    \makeHeadOfDepartmentSignature
+
+    \makeTitle{ЗАДАНИЕ\\на \@workTypeAcc}
+
+    \makeStudentLine
+
+    \makeSupervisorLine
+}
