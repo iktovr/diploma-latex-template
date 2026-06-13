@@ -1,0 +1,61 @@
+\documentclass[fontsize=12pt]{diploma}
+
+\usepackage{task}
+
+\input{info}
+
+\headOfDepartmentTitle{Директор Дирекции Института № 8}
+
+\addbibresource{main.bib}
+
+\begin{document}
+\fillTaskHeader
+
+\textbf{1.} \makeThemeLine
+
+\textbf{2. Срок сдачи обучающимся законченной работы} \uline{\textcolor{red}{24.05.\the\year} \hfill}
+
+\textbf{3. Задание и исходные данные к работе}\\
+\textcolor{red}{Задание и исходные данные к работе}
+
+\textbf{Перечень иллюстративно-графических материалов:}
+\vspace{\parskip}
+\begin{table}
+    \begin{tabularx}{\textwidth}{|c|X|c|}\hline
+    \textbf{№ п/п} & \centering\textbf{Наименование} & \textbf{Количество листов} \\ \hline
+    1 & Раздаточный материал & \textcolor{red}{42} \\ \hline
+    \end{tabularx}
+\end{table}
+
+% Все что выше должно уместиться на одну страницу. В крайнем случая можно переносить части вниз (или наоборот)
+\vfill\clearpage
+\newgeometry{left=15mm, right=30mm, top=20mm, bottom=20mm} % зеркальные поля на второй странице
+
+\textbf{4. Перечень подлежащих разработке разделов и этапы выполнения работы}
+\vspace{\parskip}
+\begin{table}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|>{\centering\arraybackslash}X|c|c|c|}\hline
+    \textbf{\makecell{№\\п/п}} & \textbf{Наименование раздела или этапа} &
+    \textbf{\makecell{Трудоёмкость в\\\% от полной\\трудоёмкости\\ВКРБ}} &
+    \textbf{Срок выполнения} & \textbf{Примечание} \\ \hline
+    1 & \textcolor{red}{Изучение литературы} & \% & \textcolor{red}{09.02.2023-00.00.2023} & \\ \hline
+      & & & & \\ \hline
+      & & & & \\ \hline
+      & & & & \\ \hline
+      & & & & \\ \hline
+    N & \textcolor{red}{Оформление выпускной квалификационной работы} & & \textcolor{red}{00.00.2023-24.05.2023} & \\ \hline
+    \end{tabularx}
+\end{table}
+
+\textbf{5. Исходные материалы и пособия}\\ % основные работы, 25-30% от приведенного в работе списка
+\fullcite{Article}\\
+\fullcite{OMS}\\
+\fullcite{cite_1_16}\\
+\fullcite{Wikipedia}\\
+\fullcite{cite_1_18}
+
+\textbf{6. Дата выдачи задания} \uline{\textcolor{red}{09.02.\the\year} \hfill}
+
+\makeTaskSignatures
+\end{document}

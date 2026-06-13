@@ -1,0 +1,99 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{diploma-review}[2026/06/12 v1.0 Отзыв о ВКР]
+
+\DeclareKeys[review]{
+    supervisor.if = @supervisorReview,
+    firstConsultant.if = @firstConsultantReview,
+    secondConsultant.if = @secondConsultantReview,
+    reviewer.if = @reviewerReview,
+}
+\ProcessKeyOptions[review]\relax
+
+\@makeVariable{reviewerType}
+\@makeVariable{reviewTitle}
+\@makeVariable{reviewSupTitle}
+
+\if@supervisorReview
+    \newcommand{\@reviewType}{supervisor}
+    \reviewerType{Руководитель}
+    \reviewTitle{отзыв}
+    \if@bachelor
+        \reviewSupTitle{руководителя}
+    \fi
+    \if@master
+        \reviewSupTitle{научного руководителя}
+    \fi
+\fi
+
+\if@firstConsultantReview
+    \newcommand{\@reviewType}{firstConsultant}
+    \reviewerType{Консультант}
+    \reviewTitle{отзыв}
+    \reviewSupTitle{консультанта}
+\fi
+
+\if@secondConsultantReview
+    \newcommand{\@reviewType}{secondConsultant}
+    \reviewerType{Консультант}
+    \reviewTitle{отзыв}
+    \reviewSupTitle{консультанта}
+\fi
+
+\if@reviewerReview
+    \newcommand{\@reviewType}{reviewer}
+    \reviewerType{Рецензент}
+    \reviewTitle{заключение}
+    \reviewSupTitle{рецензента\\о \@workTypeDat}
+\fi
+
+\RequirePackage{nopageno}
+\RequirePackage{makecell}
+\RequirePackage{parskip}
+
+\setlength{\parindent}{0cm} % нет абзацного отступа
+\setlength{\intextsep}{0pt} % убирает большие пробелы до/после таблиц
+
+\newcommand{\makeThemeLine}{
+    \textbf{Наименование темы} \expandafter\uline\expandafter{\expanded{\@theme}\hfill}
+}
+
+\newcommand{\makeReviewerLine}{
+    \textbf{\@reviewerType} \uline{\@fullname{\@reviewType},\hfill}\\
+    \uline{\@credentials{\@reviewType}\hfill}
+}
+
+\newcommand{\makeStudentLine}{
+    \textbf{Обучающийся} \uline{\@student\hfill}
+}
+
+\newcommand{\makeSimilarityLine}{
+    Работа проверена на объем заимствования. \% заимствования -- \@similarityPercentage\%
+}
+
+\newcommand{\makeReviewSignature}{
+    \uline{\hspace{1cm}}\ \uline{\hspace{2.5cm}}\ \the\year{г.}\hfill
+    \@reviewerType\ \uline{\hspace{6cm}}
+}
+
+\newcommand{\fillReviewHeader}{
+    \makeHeader
+
+    \begin{center}
+        \begingroup
+        \bfseries\fontsize{18pt}{20pt}\selectfont
+        \MakeUppercase{\@reviewTitle}
+        \endgroup\\
+        \begingroup
+        \bfseries\fontsize{14pt}{16pt}\selectfont
+        \MakeUppercase{\@reviewSupTitle}
+        \endgroup
+    \end{center}
+
+    \makeStudentLine
+
+    \makeAffiliations
+
+    \makeThemeLine
+
+    \makeReviewerLine
+}

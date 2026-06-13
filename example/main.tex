@@ -1,25 +1,6 @@
 \documentclass{diploma}
 
-\student{Гончаров Андрей Яковлевич}
-\group{М8О-407Б-19}
-\theme{Создание отчёта по ВКР}
-
-\supervisor{Орлов Марсель Максимович}
-\firstConsultant{Алешина Анна Константиновна}
-\reviewer{Свиридов Михаил Артемьевич}
-
-\faculty{№ 8 <<Компьютерные науки и прикладная математика>>}
-\department{Института № 8}
-\speciality{01.03.02 <<Прикладная математика и информатика>>}
-\profile{Информатика}
-
-\departmentFullName{}
-\headOfDepartmentTitle{И. о. директора Образовательного центра}
-\headOfDepartment{Крылов Сергей Сергеевич}
-
-% Дата. Оставляем пустое место для дня
-\date{\uline{\hspace{24pt}} мая \the\year\ года}
-
+\input{info}
 \input{contents/glossary}
 \input{contents/terms}
 
@@ -28,15 +9,15 @@
 \begin{document}
     \maketitle
 
-    % \includepdf[pages=-]{extra/task} % Задание
+    % \includepdf[pages=-]{task} % Задание
     \setcounter{page}{2} % Устанавливает счётчик страниц
 
     \include{contents/0-abstract} % Реферат
 
-    \tableofcontents % Содержание 
+    \tableofcontents % Содержание
     \termsanddefenitions % Термины и определения
     \listofabbreviations % Перечень сокращений и обозначений
- 
+
     \include{contents/1-introduction} % Введение
 
     \include{contents/2-00-compilation} % Основная часть
@@ -52,7 +33,7 @@
     \include{contents/2-10-math}
     \include{contents/2-11-algorithms}
     \include{contents/2-12-listings}
-    
+
     \include{contents/3-conclusion} % Заключение
 
     \printbibliography % Список литературы

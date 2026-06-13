@@ -5,31 +5,14 @@
 \DeclareKeys[diploma]{
     fontsize.store = \@fontsize,
     bachelor.if = @bachelor,
-    master.if = @master
+    master.if = @master,
+    handout.if = @handout,
 }
 \SetKeys[diploma]{
     fontsize = 14pt,
     bachelor
 }
 \ProcessKeyOptions[diploma]\relax
-
-\if@bachelor
-    \def\degree{бакалавр}
-    \def\workName{выпускная квалификационная работа бакалавра}
-    \def\workNameIn{выпускной квалификационной работе бакалавра}
-    \def\workNameShort{ВКРБ}
-    \def\profileType{Профиль}
-    \def\supervisorType{Руководитель}
-\fi
-
-\if@master
-    \def\degree{магистр}
-    \def\workName{выпускная квалификационная работа магистра}
-    \def\workNameIn{выпускной квалификационной работе магистра}
-    \def\workNameShort{ВКРМ}
-    \def\profileType{Магистерская программа}
-    \def\supervisorType{Научный руководитель}
-\fi
 
 \LoadClass{article}
 \RequirePackage[russian]{babel}
@@ -58,3 +41,30 @@
 \RequirePackage{22-algorithms}
 
 \makeglossaries
+
+% Значения по умолчанию
+\departmentType{}
+
+\if@bachelor
+    \degree{бакалавр}
+    \workType{выпускная квалификационная работа бакалавра}
+    \workTypeDat{выпускной квалификационной работе бакалавра}
+    \workTypeAcc{выпускную квалификационную работу бакалавра}
+    \workTypeShort{ВКРБ}
+    \profileType{Профиль}
+    \supervisorType{Руководитель}
+\fi
+
+\if@master
+    \degree{инженер-исследователь}
+    \workType{выпускная квалификационная работа}
+    \workTypeDat{выпускной квалификационной работе}
+    \workTypeAcc{выпускную квалификационную работу}
+    \workTypeShort{ВКР}
+    \profileType{Программа}
+    \supervisorType{Научный руководитель}
+\fi
+
+\if@handout
+    \workType{раздаточный материал к\\\@workTypeDat}
+\fi
